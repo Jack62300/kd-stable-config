@@ -15,27 +15,28 @@ Config.realisticMod = false
 -- No horse teleportation. You can only whistle horse if he is near than you.
 -- Horse are linked on the last stable you use to stabling it.
 
-Config.distancePromptStore = 3.0           --maximum distance to display the prompt to open the store
-Config.distanceSpawnPed = 15.0             --maximum distance to spawn the stable man
-Config.distanceSpawnHorse = 50.0           --distance to spawn the horse when whistle
-Config.distanceTeleportHorse = 200.0       -- maximum distance to whistle horse before teleport him
-Config.ExtraLightIntensity = 15.0          --Light intensity when preview horse in stable
-Config.syncTimer = 2000                    --Loop timer to resync horse after using instance
-Config.useMenuWithMouse = true             --turn off to disable the mouse controler for the menu
-Config.needAllHorseWagon = true            --turn true to only allow wagon if all needed horses are selected
-Config.refreshTimerHorseStat = 1000        --time in ms to calcul the new stat of horse. Little value = more precise but more heavy for CPU
-Config.saveHorseStatTimer = 60 * 1000      --time in ms to save new horses stats in database
-Config.disableHorseFlee = true             --disable the possibility to flee horses
-Config.usePromptHorseStatistics = true     --turn off the prompt to display horses statistics
-Config.maxDistanceWithHorseshoes = 100     --in kilometers
+Config.distancePromptStore = 3.0 --maximum distance to display the prompt to open the store
+Config.distanceSpawnPed = 15.0 --maximum distance to spawn the stable man
+Config.distanceSpawnHorse = 50.0 --distance to spawn the horse when whistle
+Config.distanceTeleportHorse = 200.0 -- maximum distance to whistle horse before teleport him
+Config.ExtraLightIntensity = 15.0 --Light intensity when preview horse in stable
+Config.syncTimer = 2000 --Loop timer to resync horse after using instance
+Config.useMenuWithMouse = true --turn off to disable the mouse controler for the menu
+Config.needAllHorseWagon = true --turn true to only allow wagon if all needed horses are selected
+Config.refreshTimerHorseStat = 1000 --time in ms to calcul the new stat of horse. Little value = more precise but more heavy for CPU
+Config.saveHorseStatTimer = 60*1000 --time in ms to save new horses stats in database
+Config.disableHorseFlee = false --disable the possibility to flee horses
+Config.usePromptHorseStatistics = true --turn off the prompt to display horses statistics
+Config.maxDistanceWithHorseshoes = 100 --in kilometers
 Config.warningMessageHorseshoePercent = 20 --display a warning message when the horseshoes is under this value
-Config.stopRunHorseshoesPercent = 10       --disable horse run when horseshoes is under this value
-Config.distanceSafeSpawn = 5.0             --minimal distance from the farest vehicle to be able to spawn a new one
-Config.useHorseHolster = false             --false to disable horse holster
+Config.stopRunHorseshoesPercent = 10 --disable horse run when horseshoes is under this value
+Config.distanceSafeSpawn = 5.0 --minimal distance from the farest vehicle to be able to spawn a new one
+Config.useHorseHolster = true --false to disable horse holster (if true, you can't ride other player's horses)
+Config.showHorseLevelUp = true --false to turn of horse exp notifications
 
-Config.winExpByWalk = {                    --horse exp win by walking
-	distance = 200,                        --distance to earn new points (in meters)
-	point = 1                              --amount earn by each distance
+Config.winExpByWalk = { --horse exp win by walking
+	distance = 200, --distance to earn new points (in meters)
+	point = 1 --amount earn by each distance
 }
 -- Bonding level depend of the horse breed
 -- Level 1 ~ 100 points
@@ -47,8 +48,10 @@ Config.winExpByWalk = {                    --horse exp win by walking
 Config.horseSlots = 5 -- maximum of horse for players (set -1 to unlimited)
 Config.wagonSlots = 5 -- maximum of horse for players (set -1 to unlimited)
 
-Config.commands = {   --set false to disable a command
-	sidesiddle = "sidesaddle"
+Config.commands = { --set false to disable a command
+	sidesiddle = "sidesaddle",
+	fixWagon = "fixWagon",
+	fixHorse = "fixHorse"
 }
 
 Config.allowCustomColorForHorse = true --turn off to remove the prompt to allow custom color on horse coat
@@ -77,13 +80,13 @@ Config.saddlebagMod = 2
 
 Config.saddlebag = {
 	maxWeight = 500.0,
-	maxSlots = 10                        --for QBR & RSG & VORP
+	maxSlots = 10 --for QBR & RSG & VORP
 }
-Config.wagonLocker = {                   --default locker size for wagon
+Config.wagonLocker = { --default locker size for wagon
 	maxWeight = 1000.0,
-	maxSlots = 50                        --for QBR & RSG & VORP
+	maxSlots = 50 --for QBR & RSG & VORP
 }
-Config.displayLockerSlotInStore = true   --Set false to hide the maxSlots
+Config.displayLockerSlotInStore = true --Set false to hide the maxSlots
 Config.displayLockerWeightInStore = true --Set false to hide the maxWeight
 
 Config.keys = {
@@ -110,7 +113,7 @@ Config.items = {
 			remove = true,
 		},
 	},
-	brush = { --let empty to unlimited horse brush
+	brush = {  --let empty to unlimited horse brush
 		{
 			name = "horsebrush",
 			remove = false,
@@ -120,23 +123,23 @@ Config.items = {
 
 Config.stables = {
 	{
-		id = "valentine", --must be unique
+		id = "valentine",--must be unique
 		name = "Valentine",
-		location = vec4(-365.15, 792.68, 115.18, 178.47),
+		location = vec4(-365.15,792.68,115.18,178.47),
 		pedModel = `u_m_m_bwmstablehand_01`,
-		blip = `blip_shop_horse`,                      --set to false to turn the blip off
-		disableHorseMenu = false,                      --set to true to disable the horse menu part
-		disableWagonMenu = false,                      --set to true to disable the wagon menu part
-		horsesAvailable = {},                          --let empty to allow all horses, use false to disable
-		canBuyHorseComponents = true,                  --use false to disable the buying of horse components
-		previewHorse = vec4(-369.59, 793.00, 115.15, 177.26), --location to preview new horse
-		previewMyHorse = vec4(-371.76, 786.87, 115.16, 272.08), --location to preview your horse
-		equipMyHorse = vec4(-371.76, 786.87, 115.16, 272.08), --location for the ride horse scene
-		wagonsAvailable = {},                          --let empty to allow all wagons, use false to disable
-		previewWagon = vec4(-371.76, 786.87, 115.16, 272.08), --location to preview wagon
+		blip = `blip_shop_horse`,--set to false to turn the blip off
+    disableHorseMenu = false, --set to true to disable the horse menu part
+    disableWagonMenu = false, --set to true to disable the wagon menu part
+		horsesAvailable = {},--let empty to allow all horses, use false to disable
+		canBuyHorseComponents = true, --use false to disable the buying of horse components
+		previewHorse = vec4(-369.59,793.00,115.15,177.26), --location to preview new horse
+		previewMyHorse = vec4(-371.76,786.87,115.16,272.08), --location to preview your horse
+		equipMyHorse = vec4(-371.76,786.87,115.16,272.08), --location for the ride horse scene
+		wagonsAvailable = {},--let empty to allow all wagons, use false to disable
+		previewWagon = vec4(-371.76,786.87,115.16,272.08), --location to preview wagon
 		spawnWagon = vec4(-370.69, 775.85, 116.26, 269.11), --location to spawn wagon
-		storeSaddle = vec4(-365.235, 790.888, 116.175, 0.0),
-		inside = {                                     --polyzone
+		storeSaddle = vec4(-365.235, 790.888, 116.175,0.0),
+		inside = { --polyzone
 			vec3(-376.765, 793.418, 116.124),
 			vec3(-363.036, 793.695, 116.188),
 			vec3(-362.191, 784.502, 116.180),
@@ -144,23 +147,23 @@ Config.stables = {
 		}
 	},
 	{
-		id = "saintDenis", --must be unique
+		id = "saintDenis",--must be unique
 		name = "Saint Denis",
 		location = vector4(2512.399, -1457.067, 46.312, 87.925),
 		pedModel = `u_m_m_bwmstablehand_01`,
-		blip = `blip_shop_horse`,                             --set to false to turn the blip off
-		disableHorseMenu = false,                             --set to true to disable the horse menu part
-		disableWagonMenu = false,                             --set to true to disable the wagon menu part
-		horsesAvailable = { 1, 2, 3, 4, 10 },                 --let empty to allow all horses
-		canBuyHorseComponents = true,                         --use false to disable the buying of horse components
+		blip = `blip_shop_horse`,--set to false to turn the blip off
+    disableHorseMenu = false, --set to true to disable the horse menu part
+    disableWagonMenu = false, --set to true to disable the wagon menu part
+		horsesAvailable = {1,2,3,4,10},--let empty to allow all horses
+		canBuyHorseComponents = true, --use false to disable the buying of horse components
 		previewHorse = vec4(2509.034, -1449.872, 45.400, 86.799), --location to preview new horse
 		previewMyHorse = vec4(2509.034, -1449.872, 45.400, 86.799), --location to preview your horse
 		equipMyHorse = vec4(2502.963, -1452.935, 46.313, 174.038), --location for the ride horse scene
-		wagonsAvailable = {},                                 --let empty to allow all wagons
+		wagonsAvailable = {},--let empty to allow all wagons
 		previewWagon = vec4(2502.689, -1441.257, 45.313, 177.895), --location to preview wagon
 		spawnWagon = vec4(2502.689, -1441.257, 45.313, 348.528), --location to spawn wagon
 		storeSaddle = vec3(2510.665, -1456.786, 46.314),
-		inside = {                                            --polyzone
+		inside = { --polyzone
 			vec3(2499.959, -1464.172, 46.313),
 			vec3(2499.969, -1436.472, 46.317),
 			vec3(2510.713, -1436.171, 46.312),
@@ -168,23 +171,23 @@ Config.stables = {
 		}
 	},
 	{
-		id = "strawberry", --must be unique
+		id = "strawberry",--must be unique
 		name = "Strawberry",
 		location = vec4(-1817.261, -559.600, 156.177, 164.684),
 		pedModel = `u_m_m_bwmstablehand_01`,
-		blip = `blip_shop_horse`,                               --set to false to turn the blip off
-		disableHorseMenu = false,                               --set to true to disable the horse menu part
-		disableWagonMenu = false,                               --set to true to disable the wagon menu part
-		horsesAvailable = { 1, 2, 3, 4, 10 },                   --let empty to allow all horses
-		canBuyHorseComponents = true,                           --use false to disable the buying of horse components
+		blip = `blip_shop_horse`,--set to false to turn the blip off
+    disableHorseMenu = false, --set to true to disable the horse menu part
+    disableWagonMenu = false, --set to true to disable the wagon menu part
+		horsesAvailable = {1,2,3,4,10},--let empty to allow all horses
+		canBuyHorseComponents = true, --use false to disable the buying of horse components
 		previewHorse = vec4(-1820.033, -555.669, 155.177, 160.508), --location to preview new horse
 		previewMyHorse = vec4(-1821.550, -561.547, 155.060, 253.239), --location to preview your horse
 		equipMyHorse = vec4(-1821.550, -561.547, 155.060, 253.239), --location for the ride horse scene
-		wagonsAvailable = {},                                   --let empty to allow all wagons
+		wagonsAvailable = {},--let empty to allow all wagons
 		previewWagon = vec4(-1821.550, -561.547, 155.060, 253.239), --location to preview wagon
 		spawnWagon = vec4(-1821.550, -561.547, 155.060, 253.239), --location to spawn wagon
-		storeSaddle = vec4(-1817.614, -560.796, 156.063, 324.503),
-		inside = {                                              --polyzone
+		storeSaddle =vec4(-1817.614, -560.796, 156.063, 324.503),
+		inside = { --polyzone
 			vec3(-1826.193, -562.865, 155.063),
 			vec3(-1824.735, -557.522, 155.240),
 			vec3(-1813.957, -560.743, 155.145),
@@ -192,23 +195,23 @@ Config.stables = {
 		}
 	},
 	{
-		id = "blackwater", --must be unique
+		id = "blackwater",--must be unique
 		name = "Blackwater",
 		location = vec4(-878.606, -1368.115, 43.527, 276.638),
 		pedModel = `u_m_m_bwmstablehand_01`,
-		blip = `blip_shop_horse`,                             --set to false to turn the blip off
-		disableHorseMenu = false,                             --set to true to disable the horse menu part
-		disableWagonMenu = false,                             --set to true to disable the wagon menu part
-		horsesAvailable = { 1, 2, 3, 4, 10 },                 --let empty to allow all horses
-		canBuyHorseComponents = true,                         --use false to disable the buying of horse components
+		blip = `blip_shop_horse`,--set to false to turn the blip off
+    disableHorseMenu = false, --set to true to disable the horse menu part
+    disableWagonMenu = false, --set to true to disable the wagon menu part
+		horsesAvailable = {1,2,3,4,10},--let empty to allow all horses
+		canBuyHorseComponents = true, --use false to disable the buying of horse components
 		previewHorse = vec4(-867.165, -1371.482, 42.659, 355.048), --location to preview new horse
 		previewMyHorse = vec4(-863.397, -1366.342, 42.549, 83.688), --location to preview your horse
 		equipMyHorse = vec4(-863.397, -1366.342, 42.549, 83.688), --location for the ride horse scene
-		wagonsAvailable = {},                                 --let empty to allow all wagons
+		wagonsAvailable = {},--let empty to allow all wagons
 		previewWagon = vec4(-863.397, -1366.342, 42.549, 83.688), --location to preview wagon
 		spawnWagon = vec4(-863.397, -1366.342, 42.549, 83.688), --location to spawn wagon
-		storeSaddle = vec4(-878.075, -1367.790, 43.528, 99.837),
-		inside = {                                            --polyzone
+		storeSaddle =vec4(-878.075, -1367.790, 43.528, 99.837),
+		inside = { --polyzone
 			vec3(-879.179, -1370.857, 41.525),
 			vec3(-879.761, -1360.371, 41.921),
 			vec3(-858.781, -1360.444, 41.659),
@@ -216,23 +219,23 @@ Config.stables = {
 		}
 	},
 	{
-		id = "tumbleweed", --must be unique
+		id = "tumbleweed",--must be unique
 		name = "Tumbleweed",
 		location = vec4(-5515.295, -3039.497, -2.388, 182.161),
 		pedModel = `u_m_m_bwmstablehand_01`,
-		blip = `blip_shop_horse`,                               --set to false to turn the blip off
-		disableHorseMenu = false,                               --set to true to disable the horse menu part
-		disableWagonMenu = false,                               --set to true to disable the wagon menu part
-		horsesAvailable = { 1, 2, 3, 4, 10 },                   --let empty to allow all horses
-		canBuyHorseComponents = true,                           --use false to disable the buying of horse components
+		blip = `blip_shop_horse`,--set to false to turn the blip off
+    disableHorseMenu = false, --set to true to disable the horse menu part
+    disableWagonMenu = false, --set to true to disable the wagon menu part
+		horsesAvailable = {1,2,3,4,10},--let empty to allow all horses
+		canBuyHorseComponents = true, --use false to disable the buying of horse components
 		previewHorse = vec4(-5522.499, -3038.960, -3.304, 181.992), --location to preview new horse
 		previewMyHorse = vec4(-5522.063, -3044.438, -3.388, 265.561), --location to preview your horse
 		equipMyHorse = vec4(-5522.063, -3044.438, -3.388, 265.561), --location for the ride horse scene
-		wagonsAvailable = {},                                   --let empty to allow all wagons
+		wagonsAvailable = {},--let empty to allow all wagons
 		previewWagon = vec4(-5522.063, -3044.438, -3.388, 265.561), --location to preview wagon
 		spawnWagon = vec4(-5522.063, -3044.438, -3.388, 265.561), --location to spawn wagon
-		storeSaddle = vec4(-5515.173, -3040.729, -2.388, 340.582),
-		inside = {                                              --polyzone
+		storeSaddle =vec4(-5515.173, -3040.729, -2.388, 340.582),
+		inside = { --polyzone
 			vec3(-5511.550, -3047.357, -3.388),
 			vec3(-5526.960, -3047.235, -3.388),
 			vec3(-5526.293, -3037.693, -3.126),
@@ -240,23 +243,23 @@ Config.stables = {
 		}
 	},
 	{
-		id = "emerald", --must be unique
+		id = "emerald",--must be unique
 		name = "Emerald",
 		location = vec4(1206.332, -191.566, 101.483, 286.763),
 		pedModel = `u_m_m_bwmstablehand_01`,
-		blip = `blip_shop_horse`,                             --set to false to turn the blip off
-		disableHorseMenu = false,                             --set to true to disable the horse menu part
-		disableWagonMenu = false,                             --set to true to disable the wagon menu part
-		horsesAvailable = {},                                 --let empty to allow all horses
-		canBuyHorseComponents = true,                         --use false to disable the buying of horse components
+		blip = `blip_shop_horse`,--set to false to turn the blip off
+    disableHorseMenu = false, --set to true to disable the horse menu part
+    disableWagonMenu = false, --set to true to disable the wagon menu part
+		horsesAvailable = {},--let empty to allow all horses
+		canBuyHorseComponents = true, --use false to disable the buying of horse components
 		previewHorse = vec4(1203.866, -196.192, 100.517, 285.963), --location to preview new horse
 		previewMyHorse = vec4(1210.128, -195.117, 100.386, 19.516), --location to preview your horse
 		equipMyHorse = vec4(1210.128, -195.117, 100.386, 19.516), --location for the ride horse scene
-		wagonsAvailable = {},                                 --let empty to allow all wagons
+		wagonsAvailable = {},--let empty to allow all wagons
 		previewWagon = vec4(1210.128, -195.117, 100.386, 19.516), --location to preview wagon
 		spawnWagon = vec4(1210.128, -195.117, 100.386, 19.516), --location to spawn wagon
-		storeSaddle = vec4(1207.473, -191.853, 101.389, 79.665),
-		inside = {                                            --polyzone
+		storeSaddle =vec4(1207.473, -191.853, 101.389, 79.665),
+		inside = { --polyzone
 			vec3(1208.220, -199.161, 100.549),
 			vec3(1204.978, -188.366, 100.482),
 			vec3(1210.377, -186.652, 100.371),
@@ -267,11 +270,11 @@ Config.stables = {
 
 Config.activities = {
 	speed = {
-		price = { money = 5, gold = 8 },
+		price = {money = 5, gold = 8},
 		numberRepeatToLevelUp = 2
 	},
 	acceleration = {
-		price = { money = 5, gold = 8 },
+		price = {money = 5, gold = 8},
 		numberRepeatToLevelUp = 2
 	},
 	handling = {
@@ -291,9 +294,9 @@ Config.trainings = {
 			vec3(-385.480, 791.913, 115.882),
 			vec3(-381.809, 788.601, 115.925)
 		},
-		blip = `blip_horse_owned_bonding_4`,       --set to false to turn the blip off
-		jobs = {},                                 --let empty to not restrict to a specific job,
-		activities = { 'speed', 'acceleration', 'handling' } --'speed'/'acceleration'/'handling'
+		blip = `blip_horse_owned_bonding_4`,--set to false to turn the blip off
+		jobs = {}, --let empty to not restrict to a specific job,
+		activities = {'speed','acceleration','handling'} --'speed'/'acceleration'/'handling'
 	}
 }
 
@@ -320,24 +323,25 @@ Config.prices = {
 	vehicle_lantern_propsets = 10,
 	vehicle_extras = 10,
 	horse_outfits = 10,
-	reviveHorse = { money = 100, gold = 23 } --set false to disable the revive of horse
+	reviveHorse = {money=100, gold = 23} --set false to disable the revive of horse
 }
 
 
 
 Config.modelPrices = {}
-for category in pairs(Config.prices) do
+for category in pairs (Config.prices) do
 	Config.modelPrices[category] = {}
 	Config.modelPrices[category] = {}
 end
 
-Config.modelPrices['horse_saddles'][2] = { money = 50, gold = 2 }
+Config.modelPrices['horse_saddles'][2] = {money = 50,gold = 2}
 
 Config.horses = {
 	[1] = {
-		price = {money=2.75, gold=2},
-		name = "Age 2",
-        age = 2,
+		price = {money=2.75,gold = 2},
+		name = "No die",
+		noDieByAge = true,
+		age = 2,
 		variations = {
 			"A_C_Horse_AmericanPaint_Greyovero",
 			"A_C_Horse_AmericanPaint_Overo",
@@ -823,362 +827,167 @@ Config.horses = {
 		}
 	},
 }
+
 Config.wagons = {
-	[1] = {
-		price = { money = 500.0, gold = 15 },
+  [1] = {
+		price = {money = 500.0, gold = 15},
 		model = "armysupplywagon",
 		locker = {
 			maxWeight = 5000.0,
 			maxSlots = 15
 		}
 	},
-	[2] = {
+  [2] = {
 		price = 10.0,
 		model = "bountywagon01x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[3] = {
-		price = { gold = 5 },
+  [3] = {
+		price = {gold = 5},
 		model = "buggy01",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[4] = {
+  [4] = {
 		model = "buggy02",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[5] = {
+  [5] = {
 		model = "buggy03",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[6] = {
+  [6] = {
 		model = "cart01",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[7] = {
+  [7] = {
 		model = "cart02",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[8] = {
+  [8] = {
 		model = "cart03",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[9] = {
+  [9] = {
 		model = "cart04",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[10] = {
+  [10] = {
 		model = "cart05",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[11] = {
+  [11] = {
 		model = "cart06",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[12] = {
+  [12] = {
 		model = "cart07",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[13] = {
+  [13] = {
 		model = "cart08",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[14] = {
+  [14] = {
 		model = "chuckwagon000x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[15] = {
+  [15] = {
 		model = "chuckwagon002x",
 	},
-	[16] = {
+  [16] = {
 		model = "coach2",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[18] = {
+  [18] = {
 		model = "coach3",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[19] = {
+  [19] = {
 		model = "coach4",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[20] = {
+  [20] = {
 		model = "coach5",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[21] = {
+  [21] = {
 		model = "coach6",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[22] = {
+  [22] = {
 		model = "coal_wagon",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[23] = {
+  [23] = {
 		model = "gatchuck_2",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[24] = {
+  [24] = {
 		model = "gatchuck",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[25] = {
+  [25] = {
 		model = "huntercart01",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[26] = {
+  [26] = {
 		model = "oilwagon01x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[27] = {
+  [27] = {
 		model = "oilwagon02x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[28] = {
+  [28] = {
 		model = "policewagon01x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[29] = {
+  [29] = {
 		model = "policewagongatling01x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[30] = {
+  [30] = {
 		model = "stagecoach001x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[31] = {
+  [31] = {
 		model = "stagecoach002x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[32] = {
+  [32] = {
 		model = "stagecoach003x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[33] = {
+  [33] = {
 		model = "stagecoach004_2x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[34] = {
+  [34] = {
 		model = "stagecoach004x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[35] = {
+  [35] = {
 		model = "stagecoach005x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[36] = {
+  [36] = {
 		model = "stagecoach006x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[38] = {
+  [38] = {
 		model = "supplywagon",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[39] = {
+  [39] = {
 		model = "utilliwag",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[40] = {
+  [40] = {
 		model = "wagon02x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[41] = {
+  [41] = {
 		model = "wagon03x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[42] = {
+  [42] = {
 		model = "wagon04x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[44] = {
+  [44] = {
 		model = "wagon05x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[45] = {
+  [45] = {
 		model = "wagon06x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[46] = {
+  [46] = {
 		model = "wagonarmoured01x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[47] = {
+  [47] = {
 		model = "wagoncircus01x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[48] = {
+  [48] = {
 		model = "wagoncircus02x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[49] = {
+  [49] = {
 		model = "wagondairy01x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[50] = {
+  [50] = {
 		model = "wagondoc01x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[51] = {
+  [51] = {
 		model = "wagonprison01x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[52] = {
+  [52] = {
 		model = "wagontraveller01x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[53] = {
+  [53] = {
 		model = "wagonwork01x",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
-	[54] = {
+  [54] = {
 		model = "warwagon2",
-		locker = {
-			maxWeight = 5000.0,
-			maxSlots = 15
-		}
 	},
 }
 
